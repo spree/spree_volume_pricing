@@ -83,9 +83,12 @@ module SpreeVolumePricing
           params[:variant][:volume_prices_attributes] ||= {}
         end      
         
-        update.response do |wants| 
+        update do
           wants.html do 
             redirect_to object.is_master ? volume_prices_admin_product_variant_url(object.product, object) : collection_url
+          end
+          failure.wants.html do
+            render :action => 'volume_prices'
           end
         end
 
