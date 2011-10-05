@@ -2,7 +2,7 @@ class CreateVolumePrices < ActiveRecord::Migration
   def self.up
     create_table :volume_prices do |t|
       t.references :variant
-      t.string :type
+      t.string :discount_type
       t.string :display
       t.string :range
       t.decimal :amount, :precision => 8, :scale => 2

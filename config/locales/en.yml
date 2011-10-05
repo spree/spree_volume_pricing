@@ -2,7 +2,7 @@
 en:
   add_volume_price: Add Volume Price
   position: Position
-  type: Type
+  discount_type: Type
   range: Range
   volume_prices: Volume Prices
   volume_pricing: Volume Pricing

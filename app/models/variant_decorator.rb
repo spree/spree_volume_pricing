@@ -6,7 +6,7 @@ Variant.class_eval do
   def volume_price(quantity)
     volume_prices.each do |price|
       if price.include?(quantity)
-        case price.type
+        case price.discount_type
         when 'price'
           return price.amount
         when 'dollar'

@@ -4,7 +4,7 @@ class VolumePrice < ActiveRecord::Base
   validates_presence_of :variant
   validates_presence_of :amount
   validates_presence_of :type
-  validates :type, :inclusion => {:in => %w(price dollar percent), :message => "%{value} is not a valid Volume Price Type"}
+  validates :discount_type, :inclusion => {:in => %w(price dollar percent), :message => "%{value} is not a valid Volume Price Type"}
   
   OPEN_ENDED = /\([0-9]+\+\)/
   
