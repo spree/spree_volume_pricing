@@ -9,8 +9,3 @@ Deface::Override.new(:virtual_path => "admin/variants/edit",
                      :insert_after => "[data-hook='admin_variant_edit_form']",
                      :partial => "admin/variants/edit_fields",
                      :disabled => false)
-# Deface::Override.new(:virtual_path => "cart",
-#                      :name => "show_volume_pricing_for_line_item",
-#                      :replace => "[data-hook='cart_item_price']",
-#                      :partial => "admin/variants/edit_fields",
-#                      :disabled => false)
