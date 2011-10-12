@@ -4,23 +4,29 @@ Variant.class_eval do
 
   # calculates the price based on quantity
   def volume_price(quantity)
-    volume_prices.each do |price|
-      if price.include?(quantity)
-        case price.discount_type
-        when 'price'
-          return price.amount
-        when 'dollar'
-          return self.price - price.amount
-        when 'percent'
-          return self.price * (1 - price.amount)
+    puts "volume price"
+    if self.volume_prices.count == 0
+      return self.price
+      puts "no volume prices - return #{self.price}"
+    else
+      puts "foun volume prices"
+      self.volume_prices.each do |price|
+        if price.include?(quantity)
+          case price.discount_type
+          when 'price'
+            return price.amount
+          when 'dollar'
+            return self.price - price.amount
+          when 'percent'
+            return self.price * (1 - price.amount)
+          else
+            return self.price
+          end
         else
-          return self.price
+          self.price
         end
-      else
-        self.price
       end
     end
-
   end
 
 end
