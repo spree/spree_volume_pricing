@@ -9,9 +9,3 @@ Deface::Override.new(:virtual_path => "admin/variants/edit",
                      :insert_after => "[data-hook='admin_variant_edit_form']",
                      :partial => "admin/variants/edit_fields",
                      :disabled => false)
-
-Deface::Override.new(:virtual_path => "shared/_products",
-                    :name => "products_listing",
-                    :replace=> "[data-hook='products_list_item']",
-                    :partial => "shared/product_listing",
-                    :disabled => false)
