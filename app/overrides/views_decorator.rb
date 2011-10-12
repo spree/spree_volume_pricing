@@ -11,7 +11,7 @@ Deface::Override.new(:virtual_path => "admin/variants/edit",
                      :disabled => false)
 
 Deface::Override.new(:virtual_path => "shared/_products",
-                    :name => "product_listing",
+                    :name => "products_list_item",
                     :replace=> "[data-hook='product-listing']",
                     :partial => "shared/product_listing",
                     :disabled => false)
