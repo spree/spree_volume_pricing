@@ -1,4 +1,5 @@
 LineItem.class_eval do
+  after_create :check_volume_pricing
   before_update :check_volume_pricing
   
   private
