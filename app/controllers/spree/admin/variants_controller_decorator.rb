@@ -9,7 +9,7 @@ Spree::Admin::VariantsController.class_eval do
     if new_actions.include?(params[:action].to_sym)
       build_resource
     elsif params[:id]
-      Variant.find(params[:id])
+      ::Spree::Variant.find(params[:id])
     end
   end
 
