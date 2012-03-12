@@ -12,3 +12,6 @@ end
 
 gemspec
 
+# Use spree master until 0.80
+gem 'spree', :git => 'git://github.com/spree/spree'
+

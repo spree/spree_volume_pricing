@@ -1,4 +1,4 @@
-class VolumePrice < ActiveRecord::Base
+class Spree::VolumePrice < ActiveRecord::Base
   belongs_to :variant
   acts_as_list :scope => :variant
 

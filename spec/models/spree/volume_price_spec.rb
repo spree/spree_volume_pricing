@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe VolumePrice do
-
+describe Spree::VolumePrice do
   it { should belong_to(:variant) }
   it { should validate_presence_of(:variant) }
   it { should validate_presence_of(:amount) }
 
   before(:each) do
-    @volume_price = VolumePrice.new(:variant => Variant.new, :amount => 10)
+    @volume_price = Spree::VolumePrice.new(:variant => Spree::Variant.new, :amount => 10)
   end
 
   it "should not interepret a Ruby range as being opend ended" do
