@@ -6,7 +6,7 @@ class Spree::VolumePrice < ActiveRecord::Base
   validates_presence_of :variant
   validates_presence_of :amount
 
-  attr_accessible :amount, :range, :variant
+  attr_accessible :amount, :name, :position, :range, :variant
 
   OPEN_ENDED = /\(?[0-9]+\+\)?/
 
