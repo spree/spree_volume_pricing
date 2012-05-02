@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Spree::VolumePrice do
+  it { should belong_to(:variant) }
+  it { should validate_presence_of(:variant) }
+  it { should validate_presence_of(:amount) }
+
   before(:each) do
     @volume_price = Spree::VolumePrice.new(:variant => Spree::Variant.new, :amount => 10)
   end
@@ -28,13 +32,13 @@ describe Spree::VolumePrice do
       @volume_price.range = "(1...2)"
       @volume_price.should be_valid
     end
-    it "should consider a range of 1..2 to be valid" do
+    it "should not consider a range of 1..2 to be valid" do
       @volume_price.range = "1..2"
-      @volume_price.should be_valid
+      @volume_price.should_not be_valid
     end
-    it "should consider a range of 1...2 to be valid" do
+    it "should not consider a range of 1...2 to be valid" do
       @volume_price.range = "1...2"
-      @volume_price.should be_valid
+      @volume_price.should_not be_valid
     end
     it "should consider a range of (10+) to be valid" do
       @volume_price.range = "(10+)"
@@ -42,7 +46,7 @@ describe Spree::VolumePrice do
     end
     it "should not consider a range of 10+ to be valid" do
       @volume_price.range = "10+"
-      @volume_price.should be_valid
+      @volume_price.should_not be_valid
     end
     it "should not consider a range of 1-2 to valid" do
       @volume_price.range = "1-2"
