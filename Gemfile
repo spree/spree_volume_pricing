@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
 group :test do
-  gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 2.9.0'
+  gem 'factory_girl', '~> 2.6.4'
+  gem 'factory_girl_rails', '~> 1.7'
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'guard-rspec'
@@ -15,5 +15,3 @@ group :test do
 end
 
 gem 'spree', '~> 1.1'
-
-gemspec
