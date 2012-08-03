@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Spree::LineItem do
   before :each do
-    @order = Factory.create(:order)
-    @variant = Factory.create(:variant, :price => 10)
+    @order = FactoryGirl.create(:order)
+    @variant = FactoryGirl.create(:variant, :price => 10)
     @variant.volume_prices.create! :amount => 9, :range => '(2+)'
     @order.add_variant(@variant, 1)
     @line_item = @order.line_items.first
@@ -12,7 +12,7 @@ describe Spree::LineItem do
   it 'should update the line item price when the quantity changes to match a range' do
     @line_item.price.to_f.should == 10.00
     @order.add_variant(@variant, 1)
-    @line_item.price.to_f.should == 9.00
+    @order.line_items.first.price.to_f.should == 9.00
   end
 end
 

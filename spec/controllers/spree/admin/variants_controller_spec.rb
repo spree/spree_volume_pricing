@@ -5,14 +5,15 @@ describe Spree::Admin::VariantsController do
   before do
     controller.stub :current_user => user
     user.stub :has_role? => true
+    controller.stub :admin_variants_url => "/"
   end
 
   describe "PUT #update" do
     it "creates a volume price" do
-      variant = Factory :variant
+      variant = FactoryGirl.create :variant
 
       lambda do
-        put :update,
+        spree_put :update,
           :product_id => variant.product.permalink,
           :id => variant.id,
           :variant => {
