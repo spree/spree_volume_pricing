@@ -1,7 +1,7 @@
 Spree::Order.class_eval do
   # override the add_variant functionality so that we can adjust the price based on possible volume adjustment
   def add_variant(variant, quantity=1)
-    current_item = contains?(variant)
+    current_item = find_line_item_by_variant(variant)
     price = variant.volume_price(quantity) # Added
     if current_item
       current_item.quantity += quantity
