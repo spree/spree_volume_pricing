@@ -9,15 +9,15 @@ module SpreeVolumePricing
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      String.class_eval do 
+      String.class_eval do
         def to_range
           case self.count('.')
           when 2
             elements = self.split('..')
-            return Range.new(elements[0].from(1).to_i, elements[1].to_i)
+            return Range.new(elements[0].to_i, elements[1].to_i)
           when 3
             elements = self.split('...')
-            return Range.new(elements[0].from(1).to_i, elements[1].to_i-1)
+            return Range.new(elements[0].to_i, elements[1].to_i-1)
           else
             raise ArgumentError.new("Couldn't convert to Range: #{self}")
           end
