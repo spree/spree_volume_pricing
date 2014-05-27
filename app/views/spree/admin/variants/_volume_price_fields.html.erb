@@ -4,7 +4,7 @@
     <%= f.hidden_field :id %>
   </td>
   <td data-hook="volume_pricing_name">
-    <%= f.text_field :name, :size => 10, :class => 'fullwidth' %>
+    <%= f.text_field :name, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :name) %>
   </td>
   <td data-hook="volume_pricing_discount_type">
@@ -12,11 +12,11 @@
     <%= error_message_on(f.object, :discount_type) %>
   </td>
   <td data-hook="volume_pricing_range">
-    <%= f.text_field :range, :size => 10, :class => 'fullwidth' %>
+    <%= f.text_field :range, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :range) %>
   </td>
   <td data-hook="volume_pricing_amount">
-    <%= f.text_field :amount, :size => 10, :class => 'fullwidth' %>
+    <%= f.text_field :amount, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :amount) %>
   </td>
   <td class="actions">
