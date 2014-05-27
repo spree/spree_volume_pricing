@@ -1,13 +1,8 @@
 Spree::Admin::VariantsController.class_eval do
-
-  def edit
-    @variant.volume_prices.build if @variant.volume_prices.empty?
-    super
-  end
+  before_filter :setup_new_volume_price, :only => [:edit, :volume_prices]
 
   def volume_prices
     @product = @variant.product
-    @variant.volume_prices.build if @variant.volume_prices.empty?
   end
 
   private
@@ -31,4 +26,7 @@ Spree::Admin::VariantsController.class_eval do
     super
   end
 
+  def setup_new_volume_price
+    @variant.volume_prices.build if @variant.volume_prices.empty?
+  end
 end
