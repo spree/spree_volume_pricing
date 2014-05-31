@@ -3,7 +3,7 @@ class Spree::VolumePrice < ActiveRecord::Base
   acts_as_list :scope => :variant
 
   validates :amount, :presence => true
-  validates :discount_type, :presence => true, :inclusion => {:in => %w(price dollar percent), :message => "%{value} is not a valid Volume Price Type"}
+  validates :discount_type, :inclusion => {:in => %w(price dollar percent), :message => "%{value} is not a valid Volume Price Type"}
   validates :range, :format => {:with => /\(?[0-9]+(?:\.{2,3}[0-9]+|\+\)?)/, :message => "must be in one of the following formats: (a..b), (a...b), (a+)"}
   validates :variant, :presence => true
 

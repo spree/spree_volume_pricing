@@ -1,13 +1,19 @@
 Spree::Admin::VariantsController.class_eval do
-
-  def edit
-    @variant.volume_prices.build if @variant.volume_prices.empty?
-    super
-  end
+  before_filter :setup_new_volume_price, :only => [:edit, :volume_prices]
 
   def volume_prices
     @product = @variant.product
-    @variant.volume_prices.build if @variant.volume_prices.empty?
+  end
+
+  def update_volume_price_positions
+    params[:positions].each do |id, index|
+      Spree::VolumePrice.find(id).update_attributes(:position => index)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to spree.admin_product_volume_prices_path(@variant) }
+      format.js { render :text => 'Ok' }
+    end
   end
 
   private
@@ -31,4 +37,7 @@ Spree::Admin::VariantsController.class_eval do
     super
   end
 
+  def setup_new_volume_price
+    @variant.volume_prices.build if @variant.volume_prices.empty?
+  end
 end

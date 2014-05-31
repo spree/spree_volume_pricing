@@ -1,25 +1,25 @@
-<tr class="volume_price fields">
-  <td>
+<tr class="volume_price fields" id="spree_<%= dom_id(f.object) %>" data-hook="volume_price" class="<%= cycle('odd', 'even')%>">
+  <td class="no-border">
+    <span class="handle"></span>
+    <%= f.hidden_field :id %>
+  </td>
+  <td data-hook="volume_pricing_name">
+    <%= f.text_field :name, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :name) %>
-    <%= f.text_field :name, :size => 10 %>
   </td>
-  <td>
+  <td data-hook="volume_pricing_discount_type">
+    <%= f.select(:discount_type, [["#{t(:total_price)}",'price'],["#{t(:percent_discount)}",'percent'],["#{t(:price_discount)}",'dollar']], { :include_blank => true }, { :class => 'select2 fullwidth' }) %>
     <%= error_message_on(f.object, :discount_type) %>
-    <%= f.select :discount_type, [["#{t(:total_price)}",'price'],["#{t(:percent_discount)}",'percent'],["#{t(:price_discount)}",'dollar']] %>
   </td>
-  <td>
+  <td data-hook="volume_pricing_range">
+    <%= f.text_field :range, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :range) %>
-    <%= f.text_field :range, :size => 10 %>
   </td>
-  <td>
+  <td data-hook="volume_pricing_amount">
+    <%= f.text_field :amount, :class => 'fullwidth' %>
     <%= error_message_on(f.object, :amount) %>
-    <%= f.text_field :amount, :size => 10 %>
   </td>
-  <td>
-    <%= error_message_on(f.object, :position) %>
-    <%= f.text_field :position, :size => 3 %>
-  </td>
-  <td valign="actions">
-    <%= link_to_remove_fields t("remove"), f %>
+  <td class="actions">
+    <%= link_to_remove_fields t("remove"), f, :no_text => true %>
   </td>
 </tr>

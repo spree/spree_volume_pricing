@@ -1,8 +1,11 @@
 routes = lambda do
   namespace :admin do 
     resources :products do 
-       resources :variants do
+      resources :variants do
         get :volume_prices, :on => :member
+        collection do
+          post :update_volume_price_positions
+        end
       end
     end
 
