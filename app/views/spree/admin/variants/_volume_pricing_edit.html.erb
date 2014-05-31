@@ -1,0 +1,20 @@
+  <h3><%= t("volume_prices") %></h3>
+  <table class="index sortable" data-hook data-sortable-link="<%= url_for :action => 'update_volume_price_positions' %>">
+    <thead data-hook="volume_price_header">
+      <tr>
+        <th colspan="2"><%= t("name") %></th>
+        <th><%= t("discount_type") %></th>
+        <th><%= t("range") %> <span class="required">*</span></th>
+        <th><%= t("amount") %> <span class="required">*</span></th>
+        <th class="actions"><%= t("action") %></th>
+      </tr>
+    </thead>
+    <tbody id="volume_prices">
+      <%= f.fields_for :volume_prices do |vp_form| %>
+        <%= render :partial => 'spree/admin/variants/volume_price_fields', :locals => { :f => vp_form } %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to_add_fields t("add_volume_price"), "tbody#volume_prices", {:class => 'button fa fa-plus'} %>
+  <br/><br/>
+
