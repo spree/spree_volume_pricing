@@ -1,6 +1,6 @@
 ---
 ru:
-  Spree:
+  spree:
     add_volume_price: Добавить цену в зависимости от количества
     position: Позиция в списке
     range: Диапазон
