@@ -5,7 +5,7 @@
   </td>
   <td>
     <%= error_message_on(f.object, :discount_type) %>
-    <%= f.select :discount_type, [["#{t(:total_price)}",'price'],["#{t(:percent_discount)}",'percent'],["#{t(:price_discount)}",'dollar']] %>
+    <%= f.select :discount_type, [["#{Spree.t(:total_price)}",'price'],["#{Spree.t(:percent_discount)}",'percent'],["#{Spree.t(:price_discount)}",'dollar']] %>
   </td>
   <td>
     <%= error_message_on(f.object, :range) %>
@@ -20,6 +20,6 @@
     <%= f.text_field :position, :size => 3 %>
   </td>
   <td valign="actions">
-    <%= link_to_remove_fields t("remove"), f %>
+    <%= link_to_remove_fields Spree.t(:remove), f %>
   </td>
 </tr>
