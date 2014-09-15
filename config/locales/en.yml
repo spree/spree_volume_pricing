@@ -1,6 +1,6 @@
 ---
 en:
-  Spree:
+  spree:
     add_volume_price: Add Volume Price
     position: Position
     discount_type: Discount Type
