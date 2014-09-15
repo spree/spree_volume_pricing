@@ -19,7 +19,7 @@
     <%= error_message_on(f.object, :position) %>
     <%= f.text_field :position, :size => 3 %>
   </td>
-  <td valign="actions">
-    <%= link_to_remove_fields Spree.t(:remove), f %>
+  <td class="actions">
+    <%= link_to_remove_fields '', f, class: 'no-text' %>
   </td>
 </tr>
