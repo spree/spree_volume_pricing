@@ -4,4 +4,5 @@ ru:
   position: Позиция в списке
   range: Диапазон
   volume_prices: Цены в зависимости от количества
-  volume_pricing: Цена в зависимости от количества
+  Spree:
+    volume_pricing: Цена в зависимости от количества

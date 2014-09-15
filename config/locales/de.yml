@@ -4,4 +4,5 @@ de:
   position: Position
   range: Bereich
   volume_prices: Staffelpreise
-  volume_pricing: Staffelpreis
+  Spree:
+    volume_pricing: Staffelpreis
