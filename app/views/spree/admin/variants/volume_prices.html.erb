@@ -1,5 +1,5 @@
 <%= render 'spree/admin/shared/product_sub_menu' %>
-<%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Volume Pricing"} %>
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: Spree.t(:volume_pricing) } %>
 <%= render "spree/shared/error_messages", :target => @variant %>
 
 <%= form_for(@variant, :url => admin_product_variant_path(@product, @variant), :html => { :method => :put }) do |f| %>
