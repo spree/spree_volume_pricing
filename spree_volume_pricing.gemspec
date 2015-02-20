@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency('spree_core', '~> 2.4.0.beta')
+  s.add_dependency('spree_core', '~> 3.0.0.rc2')
 
   s.add_development_dependency('sqlite3')
   s.add_development_dependency('capybara', '~> 1.1')
