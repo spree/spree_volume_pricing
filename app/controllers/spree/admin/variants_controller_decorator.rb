@@ -1,13 +1,14 @@
 Spree::Admin::VariantsController.class_eval do
 
   def edit
-    @variant.volume_prices.build if @variant.volume_prices.empty?
+    @variant.volume_price_models.build if !@variant.volume_price_models
     super
   end
 
-  def volume_prices
+  def volume_price_models
     @product = @variant.product
-    @variant.volume_prices.build if @variant.volume_prices.empty?
+    @volume_price_models = Spree::VolumePriceModel.all
+    @variant.volume_price_models.build if @variant.volume_price_models.empty?
   end
 
   private
