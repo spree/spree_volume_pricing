@@ -1,9 +1,18 @@
 Spree::Variant.class_eval do
-  has_many :volume_prices, -> { order(position: :asc) }, dependent: :destroy
-  accepts_nested_attributes_for :volume_prices, allow_destroy: true,
-    reject_if: proc { |volume_price|
-      volume_price[:amount].blank? && volume_price[:range].blank?
-    }
+  has_and_belongs_to_many :volume_price_models, class_name: 'Spree::VolumePriceModel', join_table: 'spree_volume_price_model_variant'
+
+  # Resolve the pricing model
+  def volume_price_model
+    Rails.logger.info "In volume_price_model*******************************"
+    Rails.logger.info "Size: #{self.volume_price_models.size} ****************"
+
+    self.volume_price_models.find(1)
+  end
+
+  # Alias volume prices
+  def volume_prices
+    vprices = volume_price_model.volume_prices
+  end
 
   # calculates the price based on quantity
   def volume_price(quantity)

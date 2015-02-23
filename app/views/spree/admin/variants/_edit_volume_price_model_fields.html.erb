@@ -1,0 +1,10 @@
+<h3><%= Spree.t(:volume_price_models) %></h3>
+<div data-hook="admin_product_form_tax_category">
+  <%= f.field_container :volume_price_model, class: ['form-group'] do %>
+    <%= f.label :volume_price_model_id, Spree.t(:volume_price_model) %>
+    <%= f.collection_select(:volume_price_model_ids, Spree::VolumePriceModel.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', disabled: (cannot? :edit, Spree::VolumePriceModel) }) %>
+    <%= f.error_message_on :volume_price_model %>
+  <% end %>
+</div>
+<%= link_to_add_fields Spree.t(:add_volume_price_model), "tbody#volume_price_models" %>
+<br/><br/>
