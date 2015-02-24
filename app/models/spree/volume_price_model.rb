@@ -7,6 +7,5 @@ class Spree::VolumePriceModel < ActiveRecord::Base
     }
     
   validates :name, presence: true, uniqueness: true
-  validates :variant, presence: true
 
 end
