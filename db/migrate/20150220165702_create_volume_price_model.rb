@@ -3,6 +3,7 @@ class CreateVolumePriceModel < ActiveRecord::Migration
   def self.up
     create_table :volume_price_models do |t|
       t.string :name
+      t.timestamps
     end
 
     create_table :spree_volume_price_model_variant do |t|
@@ -11,15 +12,11 @@ class CreateVolumePriceModel < ActiveRecord::Migration
     end
 
     remove_reference :spree_volume_prices, :variant
-    add_reference :spree_volume_prices, :volume_price_models
-    add_reference :spree_variants, :volume_price_models
   end
 
 
   def self.down
     add_reference :spree_volume_prices, :variant
-    remove_reference :spree_volume_prices, :volume_price_models
-    remove_reference :spree_variants, :volume_price_models
 
     drop_table :spree_volume_price_models
     drop_table :spree_volume_price_model_variant

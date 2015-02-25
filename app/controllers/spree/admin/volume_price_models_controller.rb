@@ -2,6 +2,7 @@ module Spree
   module Admin
     class VolumePriceModelsController < ResourceController
 
+      before_action :load_volume_prices, only: [:new, :edit]
       respond_to :json, :only => [:get_children]
 
       def get_children
@@ -16,6 +17,10 @@ module Spree
         else
           admin_volume_price_models_url
         end
+      end
+
+      def load_volume_prices
+        @volume_price_model.volume_prices.build if @volume_price_model.volume_prices.empty?
       end
     end
   end
