@@ -1,0 +1,16 @@
+---
+tr:
+  spree:
+    add_volume_price: Toplu Fiyat Ekle
+    position: Konum
+    discount_type: İndirim Türü
+    range: Aralık
+    volume_prices: Toplu Fiyatlar
+    amount: Miktar
+    name: İsim
+    action: Eylem
+    remove: Kaldır
+    total_price: Toplam Fiyat
+    price_discount: Fiyat İndirimi
+    percent_discount: Yüzdelik İndirim
+    volume_pricing: Toplu Fiyatlandırma
