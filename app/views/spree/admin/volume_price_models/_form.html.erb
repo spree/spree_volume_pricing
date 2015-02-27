@@ -5,5 +5,11 @@
     <%= text_field :volume_price_model, :name, :class => 'form-control' %>
   <% end %>
 
+  <%= f.field_container :role, class: ['form-group'] do %>
+    <%= f.label :name, Spree.t(:role) %>
+    <%= f.collection_select(:role_id, Spree::Role.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', disabled: (cannot? :edit, Spree::Role) }) %>
+    <%= f.error_message_on :role %>
+  <% end %>
+
   <%= render 'spree/admin/volume_prices/edit_fields', f: f %>
 </div>

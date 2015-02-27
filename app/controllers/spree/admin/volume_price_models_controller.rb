@@ -3,7 +3,7 @@ module Spree
     class VolumePriceModelsController < ResourceController
 
       before_action :load_volume_prices, only: [:new, :edit]
-      respond_to :json, :only => [:get_children]
+      respond_to :json, only: [:get_children]
 
       def get_children
         @volume_prices = VolumePrice.find(params[:parent_id]).children

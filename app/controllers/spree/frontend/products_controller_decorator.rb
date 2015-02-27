@@ -3,7 +3,8 @@ Spree::ProductsController.class_eval do
 
   private
     def load_pricing_model
-      @volume_prices = @product.master.volume_prices
+      role = try_spree_current_user.resolve_role
+      @volume_prices = @product.master.volume_prices(role)
     end
 
 end
