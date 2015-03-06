@@ -14,6 +14,8 @@ Each VolumePrice contains the following values:
 1. **Amount:** The price of the product if the line item quantity falls within the specified range.
 1. **Position:** Integer value for `acts_as_list` (Helps keep the volume prices in a defined order.)
 
+Also it has cloning capabilities.
+
 Install
 =======
 

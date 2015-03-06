@@ -5,6 +5,18 @@ Spree::Variant.class_eval do
       volume_price[:amount].blank? && volume_price[:range].blank?
     }
 
+  # clone volume prices to other variant
+  def self.clone_volume_prices(from_variant, to_variant)
+    if from_variant.volume_prices.any?
+      # clear previous volume prices
+      to_variant.volume_prices.delete_all
+      from_variant.volume_prices.each do |source|
+        to_variant.volume_prices << source.dup
+      end
+      to_variant.save
+    end
+  end
+
   # calculates the price based on quantity
   def volume_price(quantity)
     if self.volume_prices.count == 0

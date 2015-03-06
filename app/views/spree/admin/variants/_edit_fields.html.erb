@@ -1,4 +1,6 @@
 <h3><%= Spree.t(:volume_prices) %></h3>
+<%= Spree.t(:copy_from_other_variant) %> <%= select_tag "clone_products", options_for_select(@variant.product.variants_and_option_values.reject{|v| v == @variant }.collect{|v| ["#{variant_options(v)} - #{v.volume_prices.count} prices", v.id]}), include_blank: true  %>
+<hr />
 <table class="index">
   <thead>
     <tr>
