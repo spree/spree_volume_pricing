@@ -1,4 +1,6 @@
 <h3><%= Spree.t(:volume_prices) %></h3>
+<%= Spree.t(:copy_from_other_variant) %> <%= select_tag "clone_products", options_for_select(@variant.product.variants_and_option_values.reject{|v| v == @variant }.collect{|v| ["#{variant_options(v)} - #{v.volume_prices.count} prices", v.id]}), include_blank: true  %>
+<hr />
 <table class="index">
   <thead>
     <tr>
@@ -16,5 +18,11 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to_add_fields Spree.t(:add_volume_price), "tbody#volume_prices" %>
+<%#= link_to_add_fields Spree.t(:add_volume_price), "tbody#volume_prices" %>
 <br/><br/>
+
+<% content_for :page_actions do %>
+  <span id="new_add_volume_price" data-hook>
+    <%= button_link_to Spree.t(:add_volume_price), "javascript:;", { :icon => 'add', :'data-target' => "tbody#volume_prices", :class => 'btn-success spree_add_fields' } %>
+  </span>
+<% end %>

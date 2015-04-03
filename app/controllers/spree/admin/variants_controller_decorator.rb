@@ -5,6 +5,14 @@ Spree::Admin::VariantsController.class_eval do
     super
   end
 
+  def update
+    unless params["clone_products"].empty?
+      source = Spree::Variant.find(params["clone_products"])
+      Spree::Variant.clone_volume_prices(source, @variant)
+    end
+    super
+  end
+
   def volume_prices
     @product = @variant.product
     @variant.volume_prices.build if @variant.volume_prices.empty?
