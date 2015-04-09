@@ -1,4 +1,4 @@
-class Spree::VolumePrice < ActiveRecord::Base
+class Spree::VolumePrice < Spree::Base
   belongs_to :volume_price_model, :touch => true
   acts_as_list :scope => :volume_price_model
 

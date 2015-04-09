@@ -1,5 +1,5 @@
 <h3><%= Spree.t(:volume_prices) %></h3>
-<table class="index">
+<table class="table">
   <thead>
     <tr>
       <th><%= Spree.t(:name) %></th>
@@ -16,5 +16,5 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to_add_fields Spree.t(:add_volume_price), "tbody#volume_prices" %>
+<%= button_link_to Spree.t(:add_volume_price), "javascript:;", { :icon => 'add', :'data-target' => "tbody#volume_prices", :class => 'btn-success spree_add_fields' } %>
 <br/><br/>

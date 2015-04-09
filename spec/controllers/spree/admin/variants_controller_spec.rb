@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Admin::VariantsController do
+Rspec.describe Spree::Admin::VariantsController, :type => :controller do
   stub_authorization!
 
   describe "PUT #update" do
