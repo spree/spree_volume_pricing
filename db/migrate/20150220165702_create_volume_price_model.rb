@@ -1,24 +1,20 @@
 class CreateVolumePriceModel < ActiveRecord::Migration
 
-  def self.up
+  def change
     create_table :volume_price_models do |t|
       t.string :name
       t.timestamps
     end
 
     create_table :spree_volume_price_model_variant do |t|
-      t.belongs_to :volume_price_model, index: true
-      t.belongs_to :variant, index: true
+      t.belongs_to :volume_price_model
+      t.belongs_to :variant
     end
+
+    add_index :spree_volume_price_model_variant, :volume_price_model_id, name: 'volume_price_model_id'
+    add_index :spree_volume_price_model_variant, :variant_id, name: 'variant_id'
 
     remove_reference :spree_volume_prices, :variant
   end
 
-
-  def self.down
-    add_reference :spree_volume_prices, :variant
-
-    drop_table :spree_volume_price_models
-    drop_table :spree_volume_price_model_variant
-  end
 end

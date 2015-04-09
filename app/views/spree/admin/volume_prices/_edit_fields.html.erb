@@ -1,7 +1,10 @@
-<% content_for :page_actions do %>
+<% content_for page_actions do %>
   <span id="new_add_volume_price" data-hook>
     <%= button_link_to Spree.t(:add_volume_price), 'javascript:;', {
-      icon: 'add', :'data-target' => 'tbody#volume_prices', class: 'btn-success spree_add_fields' } %>
+        icon: 'add', 
+        'data-target': 'tbody#volume_prices', 
+        class: 'btn-success spree_add_fields' 
+      } %>
   </span>
 <% end %>
 
@@ -23,3 +26,9 @@
     <% end %>
   </tbody>
 </table>
+<%= button_link_to Spree.t(:add_volume_price), "javascript:;", { 
+    icon: 'add', 
+    'data-target': "tbody#volume_prices", 
+    class: 'btn-success spree_add_fields' 
+  } %>
+<br/><br/>

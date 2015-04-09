@@ -1,4 +1,4 @@
-class Spree::VolumePriceModel < ActiveRecord::Base
+class Spree::VolumePriceModel < Spree::Base
   scope :by_role, ->(role) { where("role_id = ?", role) }
 
   has_and_belongs_to_many :variants, class_name: 'Spree::Variant', join_table: 'spree_volume_price_model_variant'
