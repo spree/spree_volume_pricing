@@ -7,7 +7,7 @@
 
   <%= f.field_container :role, class: ['form-group'] do %>
     <%= f.label :name, Spree.t(:role) %>
-    <%= f.collection_select(:role, Spree::Role.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', disabled: (cannot? :edit, Spree::Role) }) %>
+    <%= f.collection_select(:role_id, Spree::Role.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', disabled: (cannot? :edit, Spree::Role) }) %>
     <%= f.error_message_on :role %>
   <% end %>
 

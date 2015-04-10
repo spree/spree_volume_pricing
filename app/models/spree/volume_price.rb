@@ -2,6 +2,7 @@ class Spree::VolumePrice < Spree::Base
   belongs_to :volume_price_model, touch: true
   acts_as_list scope: :volume_price_model
 
+<<<<<<< HEAD
   validates :amount, presence: true
   validates :discount_type,
             presence: true,
@@ -14,7 +15,8 @@ class Spree::VolumePrice < Spree::Base
               with: /\(?[0-9]+(?:\.{2,3}[0-9]+|\+\)?)/,
               message: 'must be in one of the following formats: (a..b), (a...b), (a+)'
             }
-  validates :volume_price_model, presence: true
+            
+  #validates :volume_price_model, :presence => true # Causing a validation error, saying volume_price_model isn't set on creation, although it creates fine
 
   OPEN_ENDED = /\(?[0-9]+\+\)?/
 
