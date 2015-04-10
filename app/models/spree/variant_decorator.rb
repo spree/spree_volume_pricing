@@ -2,13 +2,19 @@ Spree::Variant.class_eval do
   has_and_belongs_to_many :volume_price_models, class_name: 'Spree::VolumePriceModel', join_table: 'spree_volume_price_model_variant'
 
   # Resolve the pricing model
-  def volume_price_model(role)
+  def volume_price_model(user)
+    if user
+      role = user.resolve_role
+    else
+      role = Spree::Role.find_by name: 'user'
+    end
+
     self.volume_price_models.by_role(role)
   end
 
   # Alias volume prices
-  def volume_prices(role)
-    model = volume_price_model(role).first
+  def volume_prices(user)
+    model = volume_price_model(user).first
     
     if model
       return model.volume_prices
@@ -19,11 +25,11 @@ Spree::Variant.class_eval do
   end
 
   # calculates the price based on quantity
-  def volume_price(quantity, role)
-    if self.volume_prices(role).count == 0
+  def volume_price(quantity, user)
+    if self.volume_prices(user).count == 0
       return self.price
     else
-      self.volume_prices(role).each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
