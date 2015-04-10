@@ -5,7 +5,7 @@ class Spree::VolumePrice < Spree::Base
   validates :amount, :presence => true
   validates :discount_type, :presence => true, :inclusion => {:in => %w(price dollar percent), :message => "%{value} is not a valid Volume Price Type"}
   validates :range, :format => {:with => /\(?[0-9]+(?:\.{2,3}[0-9]+|\+\)?)/, :message => "must be in one of the following formats: (a..b), (a...b), (a+)"}
-  validates :volume_price_model, :presence => true
+  #validates :volume_price_model, :presence => true # Causing a validation error, saying volume_price_model isn't set on creation, although it creates fine
 
   OPEN_ENDED = /\(?[0-9]+\+\)?/
 

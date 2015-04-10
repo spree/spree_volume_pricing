@@ -12,7 +12,7 @@
   </thead>
   <tbody id="volume_prices">
     <%= f.fields_for :volume_prices do |vp_form| %>
-      <%= render 'spree/admin/volume_prices/volume_price_fields', :f => vp_form %>
+      <%= render partial: 'spree/admin/volume_prices/volume_price_fields', locals: { f: vp_form } %>
     <% end %>
   </tbody>
 </table>
