@@ -10,8 +10,8 @@ describe Spree::LineItem do
   end
 
   it 'should update the line item price when the quantity changes to match a range' do
-    @line_item.price.to_f.should == 10.00
+    expect(@line_item.price.to_f).to eq(10.00)
     @order.contents.add(@variant, 1)
-    @order.line_items.first.price.to_f.should == 9.00
+    expect(@order.line_items.first.price.to_f).to eq(9.00)
   end
 end
