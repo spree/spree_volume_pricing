@@ -4,6 +4,7 @@ class CreateVolumePriceModel < ActiveRecord::Migration
     create_table :volume_price_models do |t|
       t.string :name
       t.timestamps
+      t.belongs_to :role
     end
 
     create_table :spree_volume_price_model_variant do |t|
