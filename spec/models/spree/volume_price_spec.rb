@@ -1,10 +1,10 @@
 RSpec.describe Spree::VolumePrice, type: :model do
-  it { is_expected.to belong_to(:variant) }
-  it { is_expected.to validate_presence_of(:variant) }
+  it { is_expected.to belong_to(:volume_price_model) }
+  #it { is_expected.to validate_presence_of(:volume_price_model) } # validate_prescence of is currently turned off
   it { is_expected.to validate_presence_of(:amount) }
 
-  before do
-    @volume_price = Spree::VolumePrice.new(variant: Spree::Variant.new, amount: 10, discount_type: 'price')
+  before(:each) do
+    @volume_price = Spree::VolumePrice.new(volume_price_model: build(:volume_price_model), amount: 10, discount_type: 'price' )
   end
 
   it 'does not interepret a Ruby range as being opend ended' do
@@ -17,9 +17,9 @@ RSpec.describe Spree::VolumePrice, type: :model do
     expect(@volume_price).to be_open_ended
   end
 
-  describe 'valid range format' do
-    it 'requires the presence of a variant' do
-      @volume_price.variant = nil
+  describe "valid range format" do
+    it "should require the presence of a volume price model" do
+      @volume_price.volume_price_model = nil
       expect(@volume_price).not_to be_valid
     end
 
