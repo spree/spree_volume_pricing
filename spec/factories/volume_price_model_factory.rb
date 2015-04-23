@@ -1,8 +1,8 @@
 FactoryGirl.define do 
   factory :volume_price_model, :class => Spree::VolumePriceModel do |f|
-    name 'Test Model'
+    sequence(:name) { |n| "Volume Price Model ##{n} - #{Kernel.rand(9999)}" }
     f.role {|p| p.association(:role) }
-    after(:create) {|vpm| vpm.variants = [create(:variant)] }
+    after(:create) {|vpm| vpm.variants = [build_stubbed(:variant)] }
 
     factory :volume_price_model_with_volume_prices do
 
