@@ -6,4 +6,3 @@ FactoryGirl.define do
     association :volume_price_model
   end
 end
-

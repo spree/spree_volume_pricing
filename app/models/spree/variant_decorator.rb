@@ -15,7 +15,7 @@ Spree::Variant.class_eval do
   # Alias volume prices
   def volume_prices(user)
     model = volume_price_model(user).first
-    
+
     if model
       return model.volume_prices
     else
@@ -47,11 +47,11 @@ Spree::Variant.class_eval do
   end
 
   # return percent of earning
-  def volume_price_earning_percent(quantity)
-    if self.volume_prices.count == 0
+  def volume_price_earning_percent(quantity, user)
+    if self.volume_prices(user).count == 0
       return 0
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
@@ -70,11 +70,11 @@ Spree::Variant.class_eval do
   end
 
   # return amount of earning
-  def volume_price_earning_amount(quantity)
-    if self.volume_prices.count == 0
+  def volume_price_earning_amount(quantity, user)
+    if self.volume_prices(user).count == 0
       return 0
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
