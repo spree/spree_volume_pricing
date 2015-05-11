@@ -1,16 +1,29 @@
 Spree::Variant.class_eval do
-  has_many :volume_prices, -> { order("position ASC") }, :dependent => :destroy
-  accepts_nested_attributes_for :volume_prices, :allow_destroy => true,
-    :reject_if => proc { |volume_price|
-      volume_price[:amount].blank? && volume_price[:range].blank?
-    }
+  has_and_belongs_to_many :volume_price_models, class_name: 'Spree::VolumePriceModel', join_table: 'spree_volume_price_model_variant'
+
+  # Resolve the pricing model
+  def volume_price_model(role)
+    self.volume_price_models.by_role(role)
+  end
+
+  # Alias volume prices
+  def volume_prices(role)
+    model = volume_price_model(role).first
+    
+    if model
+      return model.volume_prices
+    else
+      return []
+    end
+
+  end
 
   # calculates the price based on quantity
-  def volume_price(quantity)
-    if self.volume_prices.count == 0
+  def volume_price(quantity, role)
+    if self.volume_prices(role).count == 0
       return self.price
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(role).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
