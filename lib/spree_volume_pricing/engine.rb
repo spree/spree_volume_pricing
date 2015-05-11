@@ -23,6 +23,10 @@ module SpreeVolumePricing
           end
         end
       end
+      
+      Spree::AppConfiguration.class_eval do
+        preference :wholesale_role, :string, :default => "wholesale"
+      end
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
