@@ -9,7 +9,7 @@ module SpreeVolumePricing
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      String.class_eval do 
+      String.class_eval do
         def to_range
           case self.count('.')
           when 2
@@ -23,10 +23,13 @@ module SpreeVolumePricing
           end
         end
       end
+      
+      Spree::AppConfiguration.class_eval do
+        preference :wholesale_role, :string, :default => "wholesale"
+      end
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.to_prepare &method(:activate).to_proc
   end
 end
-
