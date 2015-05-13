@@ -1,16 +1,35 @@
 Spree::Variant.class_eval do
-  has_many :volume_prices, -> { order("position ASC") }, :dependent => :destroy
-  accepts_nested_attributes_for :volume_prices, :allow_destroy => true,
-    :reject_if => proc { |volume_price|
-      volume_price[:amount].blank? && volume_price[:range].blank?
-    }
+  has_and_belongs_to_many :volume_price_models, class_name: 'Spree::VolumePriceModel', join_table: 'spree_volume_price_model_variant'
+
+  # Resolve the pricing model
+  def volume_price_model(user)
+    if user
+      role = user.resolve_role
+    else
+      role = Spree::Role.find_by name: 'user'
+    end
+
+    self.volume_price_models.by_role(role)
+  end
+
+  # Alias volume prices
+  def volume_prices(user)
+    model = volume_price_model(user).first
+
+    if model
+      return model.volume_prices
+    else
+      return []
+    end
+
+  end
 
   # calculates the price based on quantity
-  def volume_price(quantity)
-    if self.volume_prices.count == 0
+  def volume_price(quantity, user)
+    if self.volume_prices(user).count == 0
       return self.price
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
@@ -28,11 +47,11 @@ Spree::Variant.class_eval do
   end
 
   # return percent of earning
-  def volume_price_earning_percent(quantity)
-    if self.volume_prices.count == 0
+  def volume_price_earning_percent(quantity, user)
+    if self.volume_prices(user).count == 0
       return 0
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
@@ -51,11 +70,11 @@ Spree::Variant.class_eval do
   end
 
   # return amount of earning
-  def volume_price_earning_amount(quantity)
-    if self.volume_prices.count == 0
+  def volume_price_earning_amount(quantity, user)
+    if self.volume_prices(user).count == 0
       return 0
     else
-      self.volume_prices.each do |volume_price|
+      self.volume_prices(user).each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'

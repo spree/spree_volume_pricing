@@ -1,0 +1,26 @@
+<table class="table sortable" data-hook data-sortable-link="<%#= update_positions_admin_volume_price_models_url %>">
+  <thead>
+    <tr data-hook="volume_price_models_header">
+      <th class="no-border"></th>
+      <th><%= Spree.t(:volume_price_models) %></th>
+    </tr>
+  </thead>
+  <tbody id='volume_price_models'>
+    <tr data-hook="volume_price_models_row">
+      <td class="move-handle">
+        <span class="icon icon-sort handle"></span>
+      </td>
+      <td>
+        <%= f.field_container :volume_price_model, class: ['form-group'] do %>
+          <%= f.label :volume_price_model_id, Spree.t(:volume_price_model) %>
+          <%= f.collection_select(:volume_price_model_ids, Spree::VolumePriceModel.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2', disabled: (cannot? :edit, Spree::VolumePriceModel) }) %>
+          <%= f.error_message_on :volume_price_model %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= button_link_to Spree.t(:add_volume_price_model), "javascript:;", { :icon => 'add', :'data-target' => "tbody#volume_price_models", :class => 'btn-success spree_add_fields' } %>
+
+<br/><br/>

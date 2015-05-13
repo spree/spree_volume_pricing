@@ -1,13 +1,13 @@
 Spree::Admin::VariantsController.class_eval do
 
   def edit
-    @variant.volume_prices.build if @variant.volume_prices.empty?
+    @variant.volume_price_models.build if @variant.volume_price_models.empty?
     super
   end
 
-  def volume_prices
+  def volume_price_models
     @product = @variant.product
-    @variant.volume_prices.build if @variant.volume_prices.empty?
+    @variant.volume_price_models.build if @variant.volume_price_models.empty?
   end
 
   private
@@ -25,7 +25,7 @@ Spree::Admin::VariantsController.class_eval do
 
   def location_after_save
     if @product.master.id == @variant.id and params[:variant].has_key? :volume_prices_attributes
-      return volume_prices_admin_product_variant_url(@product, @variant)
+      return volume_price_models_admin_product_variant_url(@product, @variant)
     end
 
     super

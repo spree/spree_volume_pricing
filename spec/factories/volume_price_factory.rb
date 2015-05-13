@@ -3,7 +3,6 @@ FactoryGirl.define do
     amount 10
     discount_type 'price'
     range '(1..5)'
-    association :variant
+    association :volume_price_model
   end
 end
-

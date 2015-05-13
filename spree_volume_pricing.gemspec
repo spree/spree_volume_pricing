@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.version     = '3.3.0'
   s.summary     = 'Allow prices to be configured in quantity ranges for each variant'
   s.description = 'Allow prices to be configured in quantity ranges for each variant'
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 2.1.0'
 
   s.author            = 'Sean Schofield'
   s.email             = 'sean@railsdog.com'
@@ -15,14 +15,16 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency('spree_core', '~> 2.4.0.beta')
+  s.add_dependency('spree_core', '~> 3.0.0')
+  s.add_dependency('spree_backend', '~> 3.0.0')
 
   s.add_development_dependency('sqlite3')
-  s.add_development_dependency('capybara', '~> 1.1')
+  s.add_development_dependency('capybara')
   s.add_development_dependency('ffaker')
   s.add_development_dependency('shoulda-matchers')
-  s.add_development_dependency('rspec-rails', '~> 2.11')
+  s.add_development_dependency('rspec-rails', '~> 3.0')
+  s.add_development_dependency 'rspec-activemodel-mocks', '1.0.0'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency('factory_girl_rails', '~> 4.3.0')
+  s.add_development_dependency('factory_girl_rails', '~> 4.5.0')
   s.add_development_dependency 'pry'
 end
