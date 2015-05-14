@@ -2,7 +2,6 @@ class Spree::VolumePrice < Spree::Base
   belongs_to :volume_price_model, touch: true
   acts_as_list scope: :volume_price_model
 
-<<<<<<< HEAD
   validates :amount, presence: true
   validates :discount_type,
             presence: true,
