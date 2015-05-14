@@ -1,5 +1,6 @@
 class Spree::VolumePrice < ActiveRecord::Base
   belongs_to :variant, touch: true
+  belongs_to :spree_role, class_name: "Spree::Role", foreign_key: "role_id"
   acts_as_list scope: :variant
 
   validates :amount, presence: true

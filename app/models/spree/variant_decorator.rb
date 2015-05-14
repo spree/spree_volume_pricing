@@ -6,11 +6,15 @@ Spree::Variant.class_eval do
     }
 
   # calculates the price based on quantity
-  def volume_price(quantity)
+  def volume_price(quantity, user=nil)
     if self.volume_prices.count == 0
       return self.price
     else
       self.volume_prices.each do |volume_price|
+        if volume_price.spree_role
+          return self.price unless user
+          return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
+        end
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
@@ -28,11 +32,15 @@ Spree::Variant.class_eval do
   end
 
   # return percent of earning
-  def volume_price_earning_percent(quantity)
+  def volume_price_earning_percent(quantity, user=nil)
     if self.volume_prices.count == 0
       return 0
     else
       self.volume_prices.each do |volume_price|
+        if volume_price.spree_role
+          return 0 unless user
+          return 0 unless user.has_spree_role? volume_price.spree_role.name.to_sym
+        end
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
@@ -51,11 +59,15 @@ Spree::Variant.class_eval do
   end
 
   # return amount of earning
-  def volume_price_earning_amount(quantity)
+  def volume_price_earning_amount(quantity, user=nil)
     if self.volume_prices.count == 0
       return 0
     else
       self.volume_prices.each do |volume_price|
+        if volume_price.spree_role
+          return 0 unless user
+          return 0 unless user.has_spree_role? volume_price.spree_role.name.to_sym
+        end
         if volume_price.include?(quantity)
           case volume_price.discount_type
           when 'price'
