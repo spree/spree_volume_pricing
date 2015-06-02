@@ -7,6 +7,6 @@ pt:
     range: Intervalo
     volume_prices: Preços Volume
     volume_pricing: Preçário Volume
-    price_discount: Preço Desconto
-    percent_discount: Percentagem Desconto
-    bulk_discount: Desconto Quantidade
+    price_discount: Desconto no Preço
+    percent_discount: Desconto em Percentagem
+    bulk_discount: Desconto por Quantidade
