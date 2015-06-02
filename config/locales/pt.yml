@@ -1,0 +1,12 @@
+---
+pt:
+  spree:
+    add_volume_price: Adicionar Preço Volume
+    position: Posição
+    discount_type: Tipo Desconto
+    range: Intervalo
+    volume_prices: Preços Volume
+    volume_pricing: Preçário Volume
+    price_discount: Preço Desconto
+    percent_discount: Percentagem Desconto
+    bulk_discount: Desconto Quantidade
