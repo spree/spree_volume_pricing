@@ -25,7 +25,7 @@
   </td>
   <td>
     <%= error_message_on(f.object, :role_id) %>
-    <%= f.select :role_id, Spree::Role.all.collect { |r| [ r.name, r.id ] }, include_blank: true, size: 3, class: 'form_control' %>
+    <%= f.collection_select(:role_id, Spree::Role.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
   </td>
   <td class="actions">
     <%= link_to_icon_remove_fields f %>
