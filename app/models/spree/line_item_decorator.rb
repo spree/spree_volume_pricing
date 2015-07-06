@@ -12,8 +12,7 @@ Spree::LineItem.class_eval do
 
     if variant
       if changed? && changes.keys.include?('quantity')
-        vprice = self.variant.volume_price(self.quantity)
-
+          vprice = self.variant.volume_price(self.quantity, self.order.user)
         if self.price.present? && vprice <= self.variant.price
           self.price = vprice and return
         end
