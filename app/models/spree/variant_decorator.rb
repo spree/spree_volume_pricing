@@ -19,15 +19,50 @@ Spree::Variant.class_eval do
       if self.product.master.join_volume_prices.count > 0 
         # self.product.master.volume_price(quantity, user)
         self.product.master.join_volume_prices.each do |volume_price|
-          get_volume_price(volume_price, quantity, user)
-        end
+
+          if volume_price.spree_role(volume_price)
+            return self.price unless user
+            return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
+          end
+          if volume_price.include?(quantity)
+            case volume_price.discount_type
+            when 'price'
+              return volume_price.amount
+            when 'dollar'
+              ret_price = self.price - volume_price.amount
+              return (ret_price > 0 ? ret_price : 0)
+            when 'percent'
+              ret_price = self.price - (self.price * (volume_price.amount/100))
+              return (ret_price > 0 ? ret_price : 0)
+            end
+          end
+
+        end #join_volume_prices.each
       else
         return self.price
       end
     else
       self.join_volume_prices.each do |volume_price|
-        get_volume_price(volume_price, quantity, user)
-      end
+        
+        #a bit redundant, here.
+        if volume_price.spree_role(volume_price)
+          return self.price unless user
+          return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
+        end
+        if volume_price.include?(quantity)
+          case volume_price.discount_type
+          when 'price'
+            return volume_price.amount
+          when 'dollar'
+            ret_price = self.price - volume_price.amount
+            return (ret_price > 0 ? ret_price : 0)
+          when 'percent'
+            ret_price = self.price - (self.price * (volume_price.amount/100))
+            return (ret_price > 0 ? ret_price : 0)
+          end
+        end
+
+      end #self.join_volume_prices.each
       # No price ranges matched.
       return self.price
     end
@@ -91,27 +126,6 @@ Spree::Variant.class_eval do
       end
       # No price ranges matched.
       return 0
-    end
-  end
-
-  private 
-
-  def get_volume_price(volume_price, quantity, user=nil)
-    if volume_price.spree_role(volume_price)
-      return self.price unless user
-      return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
-    end
-    if volume_price.include?(quantity)
-      case volume_price.discount_type
-      when 'price'
-        return volume_price.amount
-      when 'dollar'
-        ret_price = self.price - volume_price.amount
-        return (ret_price > 0 ? ret_price : 0)
-      when 'percent'
-        ret_price = self.price - (self.price * (volume_price.amount/100))
-        return (ret_price > 0 ? ret_price : 0)
-      end
     end
   end
 
