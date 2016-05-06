@@ -16,30 +16,17 @@ Spree::Variant.class_eval do
   def volume_price(quantity, user=nil)
     if self.join_volume_prices.count == 0
       #this is usually the case, no realy admin ui to add volume prices per variant.
-      #&& Spree::Config.use_master_variant_volume_pricing
       if self.product.master.join_volume_prices.count > 0 
-        self.product.master.volume_price(quantity, user)
+        # self.product.master.volume_price(quantity, user)
+        self.product.master.join_volume_prices.each do |volume_price|
+          get_volume_price(volume_price)
+        end
       else
         return self.price
       end
     else
       self.join_volume_prices.each do |volume_price|
-        if volume_price.spree_role
-          return self.price unless user
-          return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
-        end
-        if volume_price.include?(quantity)
-          case volume_price.discount_type
-          when 'price'
-            return volume_price.amount
-          when 'dollar'
-            ret_price = self.price - volume_price.amount
-            return (ret_price > 0 ? ret_price : 0)
-          when 'percent'
-            ret_price = self.price - (self.price * (volume_price.amount/100))
-            return (ret_price > 0 ? ret_price : 0)
-          end
-        end
+        get_volume_price(volume_price)
       end
       # No price ranges matched.
       return self.price
@@ -77,7 +64,7 @@ Spree::Variant.class_eval do
     end
   end
 
-  # return amount of earning
+  # return amount of earning #TODO: refactor this shit
   def volume_price_earning_amount(quantity, user=nil)
     if self.join_volume_prices.count == 0
       if !(self.product.master.join_volume_prices.count == 0) && Spree::Config.use_master_variant_volume_pricing
@@ -106,4 +93,26 @@ Spree::Variant.class_eval do
       return 0
     end
   end
+
+  private 
+
+  def get_volume_price
+    if volume_price.spree_role(volume_price)
+      return self.price unless user
+      return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
+    end
+    if volume_price.include?(quantity)
+      case volume_price.discount_type
+      when 'price'
+        return volume_price.amount
+      when 'dollar'
+        ret_price = self.price - volume_price.amount
+        return (ret_price > 0 ? ret_price : 0)
+      when 'percent'
+        ret_price = self.price - (self.price * (volume_price.amount/100))
+        return (ret_price > 0 ? ret_price : 0)
+      end
+    end
+  end
+
 end
