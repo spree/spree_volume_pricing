@@ -38,8 +38,6 @@ Spree::Variant.class_eval do
           end
 
         end #join_volume_prices.each
-      else
-        return self.price
       end
     else
       self.join_volume_prices.each do |volume_price|
@@ -63,9 +61,11 @@ Spree::Variant.class_eval do
         end
 
       end #self.join_volume_prices.each
-      # No price ranges matched.
-      return self.price
-    end
+      
+    end #if self.join_volume_prices.count == 0
+
+    # No price ranges matched.
+    return self.price
   end
 
   # return percent of earning
