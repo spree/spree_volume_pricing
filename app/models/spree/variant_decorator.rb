@@ -19,14 +19,14 @@ Spree::Variant.class_eval do
       if self.product.master.join_volume_prices.count > 0 
         # self.product.master.volume_price(quantity, user)
         self.product.master.join_volume_prices.each do |volume_price|
-          get_volume_price(volume_price)
+          get_volume_price(volume_price, quantity, user)
         end
       else
         return self.price
       end
     else
       self.join_volume_prices.each do |volume_price|
-        get_volume_price(volume_price)
+        get_volume_price(volume_price, quantity, user)
       end
       # No price ranges matched.
       return self.price
@@ -96,7 +96,7 @@ Spree::Variant.class_eval do
 
   private 
 
-  def get_volume_price(volume_price)
+  def get_volume_price(volume_price, quantity, user=nil)
     if volume_price.spree_role(volume_price)
       return self.price unless user
       return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
