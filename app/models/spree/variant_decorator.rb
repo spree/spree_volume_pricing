@@ -96,7 +96,7 @@ Spree::Variant.class_eval do
 
   private 
 
-  def get_volume_price
+  def get_volume_price(volume_price)
     if volume_price.spree_role(volume_price)
       return self.price unless user
       return self.price unless user.has_spree_role? volume_price.spree_role.name.to_sym
