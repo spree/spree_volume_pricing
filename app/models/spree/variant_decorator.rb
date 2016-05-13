@@ -10,21 +10,27 @@ Spree::Variant.class_eval do
   def join_volume_prices(user = nil)
     table = Spree::VolumePrice.arel_table
 
-    if user
-      Spree::VolumePrice.where(
-        (table[:variant_id].eq(id)
-          .or(table[:volume_price_model_id].in(volume_price_models.ids)))
-          .and(table[:role_id].eq(user.resolve_role))
+    # If we're passed a user try and match the role
+    if(user)
+      filtered_volume_prices = Spree::VolumePrice
+        .where(volume_price_where(table))
+        .where(table[:role_id]
+          .in(user.spree_roles.pluck(:id))
         )
         .order(position: :asc)
+
+      # If we were able to find volume pricing for their roles then return them
+      # else attempt to find volume pricing with no roles specified
+      if(filtered_volume_prices.length == 0)
+        filtered_volume_prices = fetch_nil_volume_prices table
+      end
     else
-      Spree::VolumePrice.where(
-        (table[:variant_id]
-          .eq(id)
-          .or(table[:volume_price_model_id].in(volume_price_models.ids)))
-          .and(table[:role_id].eq(nil))
-        ).order(position: :asc)
+      # Return volume prices unfiltered by role
+      filtered_volume_prices = fetch_nil_volume_prices table
     end
+
+    filtered_volume_prices
+    
   end
 
   # calculates the price based on quantity
@@ -43,6 +49,19 @@ Spree::Variant.class_eval do
   end
 
   protected
+
+  # create arel query for volume prices which belong to the variant
+  def volume_price_where(table)
+    table[:variant_id].eq(id).or(table[:volume_price_model_id].in(volume_price_models.ids))
+  end
+
+  # fetch all volume prices belonging to the variant with no role specified
+  def fetch_nil_volume_prices(table)
+    Spree::VolumePrice
+      .where(volume_price_where(table))
+      .where(table[:role_id].eq(nil))
+      .order(position: :asc)
+  end
 
   def use_master_variant_volume_pricing?
     Spree::Config.use_master_variant_volume_pricing && !(product.master.join_volume_prices.count == 0)
