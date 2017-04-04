@@ -17,10 +17,13 @@ Each VolumePrice contains the following values:
 ---
 
 ## Install
+For Spree v3.3.0alpha
 
+      gem 'spree_volume_pricing',  github: 'gofmanaa/spree_volume_pricing'
+      
 The extension contains a rails generator that will add the necessary migrations and give you the option to run the migrations, or run them later, perhaps after installing other extensions. Once you have bundled the extension, run the install generator and its ready to use.
 
-      rails generate spree_volume_pricing:install
+      rails spree_volume_pricing:install
 
 Easily add volume pricing display to your product page:
 
