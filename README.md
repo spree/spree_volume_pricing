@@ -1,3 +1,4 @@
+
 # Volume Pricing
 
 [![Build Status](https://travis-ci.org/spree-contrib/spree_volume_pricing.svg?branch=3-0-stable)](https://travis-ci.org/spree-contrib/spree_volume_pricing)
@@ -20,7 +21,7 @@ Each VolumePrice contains the following values:
 For Spree v3.3.0alpha
 
       gem 'spree_volume_pricing',  github: 'gofmanaa/spree_volume_pricing'
-      
+
 The extension contains a rails generator that will add the necessary migrations and give you the option to run the migrations, or run them later, perhaps after installing other extensions. Once you have bundled the extension, run the install generator and its ready to use.
 
       rails spree_volume_pricing:install

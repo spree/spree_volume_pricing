@@ -5,6 +5,6 @@ namespace :spree_volume_pricing do
     g = SpreeVolumePricing::Generators::InstallGenerator.new
     g.add_javascripts
     g.add_migrations
-    SpreeVolumePricing::Generators::InstallGenerator.run_migrations
+    g.run_migrations
   end
 end
