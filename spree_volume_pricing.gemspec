@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'mysql2'
+  s.add_development_dependency 'mysql2', '~> 0.3.18'
   s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'appraisal'
 end
