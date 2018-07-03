@@ -45,27 +45,17 @@ Spree::Variant.class_eval do
   protected
 
   def use_master_variant_volume_pricing?
-    Spree::Config.use_master_variant_volume_pricing && !(product.master.join_volume_prices.count == 0)
+    Spree::Config.use_master_variant_volume_pricing && product.master.volume_prices.any?
   end
 
-  def compute_volume_price_quantities(type, default_price, quantity, user)
-    volume_prices = join_volume_prices user
-    if volume_prices.count == 0
-      if use_master_variant_volume_pricing?
-        product.master.send(type, quantity, user)
-      else
-        return default_price
+  def compute_volume_price_quantities(type, default_price, quantity, _user)
+    bulk_prices = volume_prices.any? ? volume_prices : product.master.volume_prices
+    bulk_prices.each do |bulk_price|
+      if bulk_price.include? quantity
+        return send "compute_#{type}".to_sym, bulk_price
       end
-    else
-      volume_prices.each do |volume_price|
-        if volume_price.include?(quantity)
-          return send "compute_#{type}".to_sym, volume_price
-        end
-      end
-
-      # No price ranges matched.
-      default_price
     end
+    default_price
   end
 
   def compute_volume_price(volume_price)
