@@ -11,7 +11,7 @@ class Spree::VolumePrice < ActiveRecord::Base
             presence: true,
             inclusion: {
               in: %w(price dollar percent),
-              message: I18n.t(:'activerecord.errors.messages.is_not_included_in_the_list, value: self')
+              message: I18n.t(:'activerecord.errors.messages.is_not_included_in_the_list')
             }
   validates :range,
             format: {
