@@ -6,6 +6,8 @@ class Spree::VolumePrice < Spree::Base
 
   acts_as_list scope: [:variant_id, :volume_price_model_id]
 
+  validates :currency, presence: true
+  
   validates :amount, presence: true
   validates :discount_type,
             presence: true,
