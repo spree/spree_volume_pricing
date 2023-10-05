@@ -21,7 +21,11 @@ module Spree::LineItemDecorator
   end
 
   def update_price
-    self.price = variant.volume_price(quantity, order.user)
+    vprice = variant.volume_price(quantity, order.user)
+    if price.present? && vprice <= variant.price
+      self.price = variant.volume_price(quantity, order.user) and return
+    end
+    self.price = variant.price if price.nil?
   end
 
 end
