@@ -19,6 +19,11 @@ module Spree::LineItemDecorator
       self.price = variant.price if price.nil?
     end
   end
+
+  def update_price
+    self.price = variant.volume_price(quantity, order.user)
+  end
+
 end
 
 Spree::LineItem.prepend Spree::LineItemDecorator
